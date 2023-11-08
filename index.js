@@ -15,12 +15,12 @@ const {writeFile} = require('fs/promises')
                 choices: ['Triangle', 'Square', 'Circle']
             },
             {
-                name: 'text_color',
+                name: 'textColor',
                 type: 'input',
                 message: 'What color would you want the text to be?'
             },
             {
-                name: 'shape_color',
+                name: 'shapeColor',
                 type: 'input',
                 message: 'What color would you want the shape to be?'
             }
@@ -44,8 +44,9 @@ const {writeFile} = require('fs/promises')
                 break;
             }
 
-            shape.setColor(shapecolor);
-            const svg = new SVG ;
+            shape.setColor(data.shapeColor);
+            shape.setText(data.text);
+            shape.textColor(data.textColor);
 
         })
     function writeToFile(fileName, data) {
