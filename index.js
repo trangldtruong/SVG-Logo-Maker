@@ -3,8 +3,9 @@ const SVG = require('./svg')
 const fs = require('fs')
 const {Circle, Triangle, Square} = require('./shapes')
 const {writeFile} = require('fs/promises')
+const { default: generate } = require('@babel/generator')
 
- inquirer.prompt ([{
+var questions = [{
             name: 'text',
             type: 'input',
             message: 'Please enter three-letter text of your logo?'
@@ -24,7 +25,7 @@ const {writeFile} = require('fs/promises')
                 type: 'input',
                 message: 'What color would you want the shape to be?'
             }
-        ]).then((data) => {
+        ].then((data) => {
             let shape;
             switch(data) {
                 case 'Circle': 
@@ -59,5 +60,12 @@ const {writeFile} = require('fs/promises')
         });
     }
     function init() {
+        var sgv = "";
+        inquirer.prompt (questions)
+        .then((data) =>{
+            sgv = generateLogo(data)
+            writeToFile('logo.sgv', sgv)
+        });
 
-    }
+    };
+    init()
